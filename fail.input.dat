@@ -13,6 +13,10 @@ set {
   basis sto-3g
 }
 
+set pybind_plugin {
+  PYBIND_PLUGIN_PRINT 2
+}
+
 e,wfn = energy('scf',return_wfn=True)
 pb.myplugin(wfn,psi4.core.get_options())
 
