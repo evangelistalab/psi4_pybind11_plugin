@@ -31,3 +31,8 @@ set pybind_plugin {
 }
 print "PYBIND_PLUGIN_PRINT = ", options.get_int("PYBIND_PLUGIN_PRINT")
 pb.myplugin(wfn,psi4.core.get_options())
+
+psi4.clean_options()
+pb.read_options("PYBIND_PLUGIN",options)
+print "PYBIND_PLUGIN_PRINT = ", options.get_int("PYBIND_PLUGIN_PRINT")
+
