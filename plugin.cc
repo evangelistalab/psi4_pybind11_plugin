@@ -45,19 +45,14 @@ int read_options(std::string name, Options& options)
 {
     if (name == "PYBIND_PLUGIN"|| options.read_globals()) {
         /*- The amount of information printed to the output file -*/
-//        Process::environment.options.set_read_globals(true);
-        Process::environment.options.set_current_module(name);
         options.add_int("PYBIND_PLUGIN_PRINT", 1);
-//        Process::environment.options.set_read_globals(false);
-        Process::environment.options.validate_options();
-
     }
-
     return true;
 }
 
 SharedWavefunction myplugin(SharedWavefunction ref_wfn, Options& options)
 {
+    options.set_current_module("PYBIND_PLUGIN");
     outfile->Printf("\n Number of basis functions: %d",ref_wfn->basisset()->nbf());
     outfile->Printf("\n Print: %s",options.get_str("REFERENCE").c_str());
     outfile->Printf("\n Print: %d",options.get_int("PYBIND_PLUGIN_PRINT"));

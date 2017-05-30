@@ -64,8 +64,3 @@ def run_pybind_plugin(name, **kwargs):
 
 # Integration with driver routines
 psi4.driver.procedures['energy']['pybind_plugin'] = run_pybind_plugin
-
-
-def exampleFN():
-    # Your Python code goes here
-    pass

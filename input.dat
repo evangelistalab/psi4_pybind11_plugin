@@ -1,3 +1,4 @@
+import pybind_plugin as pb # register options here
 
 molecule {
 O
@@ -12,27 +13,13 @@ set {
   basis sto-3g
 }
 
-
-
 e,wfn = energy('scf',return_wfn=True)
 
-import pybind_plugin as pb # register options here
-options = psi4.core.get_options()
-pb.read_options("PYBIND_PLUGIN",options)
-
-set pybind_plugin {
+set PYBIND_PLUGIN {
   PYBIND_PLUGIN_PRINT 2
 }
-print "PYBIND_PLUGIN_PRINT = ", options.get_int("PYBIND_PLUGIN_PRINT")
+
 pb.myplugin(wfn,psi4.core.get_options())
 
-set pybind_plugin {
-  PYBIND_PLUGIN_PRINT 7
-}
+options.set_current_module('PYBIND_PLUGIN')
 print "PYBIND_PLUGIN_PRINT = ", options.get_int("PYBIND_PLUGIN_PRINT")
-pb.myplugin(wfn,psi4.core.get_options())
-
-psi4.clean_options()
-pb.read_options("PYBIND_PLUGIN",options)
-print "PYBIND_PLUGIN_PRINT = ", options.get_int("PYBIND_PLUGIN_PRINT")
-

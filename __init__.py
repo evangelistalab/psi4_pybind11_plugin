@@ -33,6 +33,7 @@
 """
 __version__ = '0.1'
 __author__  = 'Psi4 Developer'
+module_name = 'PYBIND_PLUGIN'
 
 # Load Python modules
 #from .pymodule import *
@@ -40,6 +41,18 @@ __author__  = 'Psi4 Developer'
 # Load C++ plugin
 import os
 import psi4
+from pybind_plugin import *
+
+options = psi4.core.get_options()
+
+options.set_read_globals(True)
+#options.set_current_module(module_name)
+pybind_plugin.read_options(module_name,options)
+#options.validate_options()
+options.set_read_globals(False)
+
+
+print("Hello!")
 #plugdir = os.path.split(os.path.abspath(__file__))[0]
 #sofile = plugdir + '/' + os.path.split(plugdir)[1] + '.so'
 #psi4.core.plugin_load(sofile)
