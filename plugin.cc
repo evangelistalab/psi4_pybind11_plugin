@@ -45,7 +45,12 @@ int read_options(std::string name, Options& options)
 {
     if (name == "PYBIND_PLUGIN"|| options.read_globals()) {
         /*- The amount of information printed to the output file -*/
+//        Process::environment.options.set_read_globals(true);
+        Process::environment.options.set_current_module(name);
         options.add_int("PYBIND_PLUGIN_PRINT", 1);
+//        Process::environment.options.set_read_globals(false);
+        Process::environment.options.validate_options();
+
     }
 
     return true;
@@ -53,7 +58,6 @@ int read_options(std::string name, Options& options)
 
 SharedWavefunction myplugin(SharedWavefunction ref_wfn, Options& options)
 {
-    read_options("PYBIND_PLUGIN",options);
     outfile->Printf("\n Number of basis functions: %d",ref_wfn->basisset()->nbf());
     outfile->Printf("\n Print: %s",options.get_str("REFERENCE").c_str());
     outfile->Printf("\n Print: %d",options.get_int("PYBIND_PLUGIN_PRINT"));
@@ -61,21 +65,11 @@ SharedWavefunction myplugin(SharedWavefunction ref_wfn, Options& options)
     return ref_wfn;
 }
 
-//extern "C"
-//SharedWavefunction pybind_plugin(SharedWavefunction ref_wfn, Options& options)
-//{
-//    int print = options.get_int("PRINT");
-
-//    /* Your code goes here */
-
-//    // Typically you would build a new wavefunction and populate it with data
-//    return ref_wfn;
-//}
-
 PYBIND11_PLUGIN(pybind_plugin) {
   py::module m("pybind_plugin", "pybind11 example plugin");
 
   m.def("myplugin", &myplugin, "Run my plugin");
+  m.def("read_options", &read_options, "Read options for my plugin");
 
   return m.ptr();
 }
