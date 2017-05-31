@@ -16,10 +16,7 @@ set {
 e,wfn = energy('scf',return_wfn=True)
 
 set PYBIND_PLUGIN {
-  PYBIND_PLUGIN_PRINT 2
+  PBP_C_PRINT 2
 }
 
 pb.myplugin(wfn,psi4.core.get_options())
-
-options.set_current_module('PYBIND_PLUGIN')
-print "PYBIND_PLUGIN_PRINT = ", options.get_int("PYBIND_PLUGIN_PRINT")
