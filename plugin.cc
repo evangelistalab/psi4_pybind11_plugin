@@ -45,7 +45,9 @@ int read_options(std::string name, Options& options)
 {
     if (name == "PYBIND_PLUGIN"|| options.read_globals()) {
         /*- The amount of information printed to the output file -*/
-        options.add_int("PYBIND_PLUGIN_PRINT", 1);
+        options.add_int("PBP_C_PRINT", 1);
+        options.add_double("PBP_C_CONV", 1e-6);
+        options.add_str("PBP_C_TYPE", "CONV", "DF CONV");
     }
     return true;
 }
@@ -54,8 +56,14 @@ SharedWavefunction myplugin(SharedWavefunction ref_wfn, Options& options)
 {
     options.set_current_module("PYBIND_PLUGIN");
     outfile->Printf("\n Number of basis functions: %d",ref_wfn->basisset()->nbf());
-    outfile->Printf("\n Print: %s",options.get_str("REFERENCE").c_str());
-    outfile->Printf("\n Print: %d",options.get_int("PYBIND_PLUGIN_PRINT"));
+    outfile->Printf("\n Ref:   %s",options.get_str("REFERENCE").c_str());
+    outfile->Printf("\n Print: %d",options.get_int("PBP_C_PRINT"));
+    outfile->Printf("\n Conv:  %f",options.get_double("PBP_C_CONV"));
+    outfile->Printf("\n Type:  %s",options.get_str("PBP_C_TYPE").c_str());
+    printf("\n Ref:   %s",options.get_str("REFERENCE").c_str());
+    printf("\n Print: %d",options.get_int("PBP_C_PRINT"));
+    printf("\n Conv:  %f",options.get_double("PBP_C_CONV"));
+    printf("\n Type:  %s",options.get_str("PBP_C_TYPE").c_str());
 
     return ref_wfn;
 }

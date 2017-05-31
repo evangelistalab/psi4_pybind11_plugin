@@ -1,0 +1,9 @@
+
+CMakeFiles/
+Makefile
+CMakeCache.txt
+__pycache__/
+.cache/
+cmake_install.cmake
+*.so
+timer.dat

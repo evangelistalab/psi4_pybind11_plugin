@@ -38,19 +38,21 @@ module_name = 'PYBIND_PLUGIN'
 # Load Python modules
 #from .pymodule import *
 
-# Load C++ plugin
+# Load pybind11 module
 import os
 import psi4
-from pybind_plugin import *
+from .pybind_plugin import *
 
-options = psi4.core.get_options()
+from .extras import prepare_options_for_plugin
+prepare_options_for_plugin(module_name, pybind_plugin.read_options)
 
-options.set_read_globals(True)
-#options.set_current_module(module_name)
-pybind_plugin.read_options(module_name,options)
-#options.validate_options()
-options.set_read_globals(False)
-
+#options = psi4.core.get_options()
+#
+#options.set_read_globals(True)
+##options.set_current_module(module_name)
+#pybind_plugin.read_options(module_name,options)
+##options.validate_options()
+#options.set_read_globals(False)
 
 print("Hello!")
 #plugdir = os.path.split(os.path.abspath(__file__))[0]

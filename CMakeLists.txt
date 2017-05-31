@@ -28,10 +28,24 @@
 # @END LICENSE
 #
 
-cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+cmake_policy(SET CMP0048 NEW)  # project_VERSION* variables populated from project(... VERSION x.x.x) string
+project(pybind_plugin
+        VERSION 0.1
+        LANGUAGES CXX C)
+set(pybind_plugin_AUTHORS     "")
+set(pybind_plugin_DESCRIPTION "")
+set(pybind_plugin_URL         "")
+set(pybind_plugin_LICENSE     "LGPL-3.0")
 
-project(pybind_plugin CXX)
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 find_package(psi4 1.0 REQUIRED)
+
+include(psi4OptionsTools)
+
+option_with_print(ENABLE_OPENMP "Enable threadsafe linking to OpenMP parallelized programs." ON)
+
+include(autocmake_omp)
 
 add_psi4_plugin(pybind_plugin plugin.cc)
