@@ -45,17 +45,3 @@ from .pybind_plugin import *
 
 from .extras import prepare_options_for_plugin
 prepare_options_for_plugin(module_name, pybind_plugin.read_options)
-
-#options = psi4.core.get_options()
-#
-#options.set_read_globals(True)
-##options.set_current_module(module_name)
-#pybind_plugin.read_options(module_name,options)
-##options.validate_options()
-#options.set_read_globals(False)
-
-print("Hello!")
-#plugdir = os.path.split(os.path.abspath(__file__))[0]
-#sofile = plugdir + '/' + os.path.split(plugdir)[1] + '.so'
-#psi4.core.plugin_load(sofile)
-
