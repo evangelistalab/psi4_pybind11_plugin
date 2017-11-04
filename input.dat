@@ -20,4 +20,5 @@ set PYBIND_PLUGIN {
   PBP_C_TYPE DF
 }
 
+print("\n  Result of function exposed via pybind11 (py-side) = %d" % pb.myplugin_function(4))
 pb.myplugin(wfn,psi4.core.get_options())
