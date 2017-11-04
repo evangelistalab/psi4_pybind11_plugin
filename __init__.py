@@ -43,5 +43,5 @@ import os
 import psi4
 from .pybind_plugin import *
 
-from .extras import prepare_options_for_plugin
+from .plugin_prep_options import prepare_options_for_plugin
 prepare_options_for_plugin(module_name, pybind_plugin.read_options)
