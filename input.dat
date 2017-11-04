@@ -16,7 +16,8 @@ set {
 e,wfn = energy('scf',return_wfn=True)
 
 set PYBIND_PLUGIN {
-  PBP_C_PRINT 2
+  PBP_C_PRINT 4
+  PBP_C_TYPE DF
 }
 
 pb.myplugin(wfn,psi4.core.get_options())
