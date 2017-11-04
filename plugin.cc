@@ -18,6 +18,7 @@ int read_options(std::string name, Options &options) {
   if (name == "PYBIND_PLUGIN" || options.read_globals()) {
     /*- The amount of information printed to the output file -*/
     options.add_int("PBP_C_PRINT", 1);
+//    options.add_int("PBP_C_PRINT", 1);
     options.add_double("PBP_C_CONV", 1e-6);
     options.add_str("PBP_C_TYPE", "CONV", "DF CONV");
   }
@@ -37,7 +38,9 @@ SharedWavefunction myplugin(SharedWavefunction ref_wfn, Options &options) {
   outfile->Printf("\n Type:  %s", options.get_str("PBP_C_TYPE").c_str());
   outfile->Printf("\n");
 
-  printf("\n  Result of function called in plugin (C++ side)    = %d\n",myplugin_function(4));
+  int n = options.get_int("PBP_C_POW");
+
+  printf("\n  Result of function called in plugin (C++ side)    = %d\n",myplugin_function(n));
 
   return ref_wfn;
 }
