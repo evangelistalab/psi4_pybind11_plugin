@@ -46,14 +46,11 @@ SharedWavefunction myplugin(SharedWavefunction ref_wfn, Options &options) {
 }
 
 
-PYBIND11_PLUGIN(pybind_plugin) {
-  py::module m("pybind_plugin", "pybind11 example plugin");
-
+PYBIND11_MODULE(pybind_plugin, m) {
+  m.doc() = "pybind_plugin: a simple pybind 11 plugin";
   m.def("myplugin", &myplugin, "Run my plugin");
   m.def("myplugin_function", &myplugin_function, "Two to the power of n");
   m.def("read_options", &read_options, "Read options for my plugin");
-
-  return m.ptr();
 }
 }
 } // End namespaces
